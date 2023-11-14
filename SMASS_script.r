@@ -9,8 +9,7 @@ SMASS <- read_excel("SMASS_Excel.xlsx")
 SMASS_table <- table(SMASS$CoD)
 SMASS_table
 
-SMASS$`Cause of Death Category`
-View(SMASS)
+# View(SMASS)
 
 SMASS$`Dorsal Blubber mm` <- as.numeric(SMASS$`Dorsal Blubber mm`)
 SMASS$`Ventral Blubber mm` <- as.numeric(SMASS$`Ventral Blubber mm`)
@@ -30,6 +29,11 @@ kmeans_result <- kmeans(dorsal_blubber_values, centers = 2)
 
 # Add cluster information to the dataframe
 starvation_data$cluster <- as.factor(kmeans_result$cluster)
+
+
+# Count cases in each cluster
+cluster_counts <- table(starvation_data$cluster)
+print(cluster_counts)
 
 # Visualize clustered data with a scatterplot
 ggplot(starvation_data, aes(x = Blubber_Average, y = cluster, color = cluster)) +
